@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT
 const host = process.env.HOST
+// console.log("PORT", process.env.PORT)
 
 app.get('/test', (req, res) => {
     res.send('Our api server is working correctly')
