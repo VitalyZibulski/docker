@@ -5,8 +5,8 @@ services:
     build: ./frontend
     container_name: app-docker-frontend
     command: serve -s build -l 3000
-    ports:
-      - "3000:3000"
+#    ports:
+#      - "3000:3000"
     restart: unless-stopped
 
   api:
@@ -48,6 +48,16 @@ services:
     container_name: app-docker-api-auth-db
     volumes:
       - mongodb_auth:/data/db
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: app-docker-nginx
+    ports:
+    - "80:80"
+    volumes:
+    - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - frontend
 
 volumes:
   mongodb_api:
